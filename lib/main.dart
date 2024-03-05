@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
+import 'package:task_manager/screens/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,8 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
-      // Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (context) =>const OnboardingScreen()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) =>const HomeScreen()));
     });
   }
 
@@ -73,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   fontSize: 25.sp,
                   fontWeight: FontWeight.w800,
                   color: blackOut,
-                  fontFamily: DoctorHuntAssetsPath.doctorHuntFont,
+                  fontFamily: TaskManagerAssetsPath.taskManagerFont,
                 ),
                 textAlign: TextAlign.center),
            ],
