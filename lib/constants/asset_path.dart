@@ -1,5 +1,5 @@
-class DoctorHuntAssetsPath {
+class TaskManagerAssetsPath {
   //*****************  Font *************************
-  static const doctorHuntFont = 'Rubik';
+  static const taskManagerFont = 'Rubik';
  
 }
