@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
+import 'package:task_manager/screens/add%20task/add_task.dart';
 import 'package:task_manager/screens/home/home.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -17,33 +18,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(children: [
-          Padding(
-            padding: EdgeInsets.only(left: 20.sp, top: 20.sp, right: 20.sp),
-            child: Row(
-              children: [
-                GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen())),
-                    child: const Icon(Icons.arrow_back_ios)),
-
-                SizedBox(width: 30.sp),
-
-                //*********  Settings Text *********/
-                Text(
-                  TaskManagerText.settings,
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.normal,
-                    fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        child: Column(
+          children: [
+          //*********  Header *********/
+          const HeaderWidget(rowTextPath: TaskManagerText.settings,),
 
           SizedBox(height: 80.sp),
 
