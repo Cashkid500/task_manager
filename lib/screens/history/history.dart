@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
+import 'package:task_manager/screens/add%20task/add_task.dart';
 import 'package:task_manager/screens/home/home.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -19,32 +20,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(bottom: 20.sp),
-          child: Column(children: [
-            Padding(
-              padding: EdgeInsets.only(left: 20.sp, top: 20.sp, right: 20.sp),
-              child: Row(
-                children: [
-                  GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreen())),
-                      child: const Icon(Icons.arrow_back_ios)),
-                  SizedBox(width: 30.sp),
+          child: Column(
+            children: [
+            //*********  Header *********/
+            const HeaderWidget(rowTextPath: TaskManagerText.history,),
 
-                  //*********  History Text *********/
-                  Text(
-                    TaskManagerText.history,
-                    style: TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             SizedBox(height: 30.sp),
 
             //********* Container *********/
