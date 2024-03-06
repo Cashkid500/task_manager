@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
@@ -6,6 +7,7 @@ import 'package:task_manager/constants/text_constants.dart';
 import 'package:task_manager/screens/add%20task/add_task.dart';
 import 'package:task_manager/screens/history/history.dart';
 import 'package:task_manager/screens/settings/settings.dart';
+import 'package:task_manager/screens/update%20task/update_task.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AddTaskScreen())),
         backgroundColor: whiteText,
         focusColor: blackText,
+        shape: const CircleBorder(),
         child: const Icon(Icons.add_outlined),
       ),
       body: SingleChildScrollView(
@@ -33,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(left: 20.sp, top: 20.sp, right: 20.sp),
               child: Row(
                 children: [
-                  const Icon(Icons.apps),
+                  GestureDetector(
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateTaskScreen())),
+                    child: const Icon(Icons.apps)),
+
                   SizedBox(width: 30.sp),
 
                   //*********  Task Manager Text *********/
@@ -60,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ]),
                   ),
                   SizedBox(width: 60.sp),
+
                   GestureDetector(
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryScreen())),
                     child: Icon(Icons.history_outlined, color: blackText, size: 25.sp)),
