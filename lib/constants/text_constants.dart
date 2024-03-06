@@ -14,6 +14,7 @@ class TaskManagerText {
   static const String addTask = "Add Task";
   static const String add = "Add";
   static const String title = "Title";
+  static const String dateText = "Date";
   static const String description = "Description";
 
 //*****************  History Texts *************************
@@ -27,4 +28,9 @@ class TaskManagerText {
   static const String clear = "CLEAR ALL DATA";
   static const String terms = "Terms and Condition";
   static const String privacy = "Privacy Policy";
+
+//****************** Update Task Texts *******************
+  static const String updateTask = "Update Task";
+  static const String update = "Update";
+  static const String delete = "Delete";
 }
