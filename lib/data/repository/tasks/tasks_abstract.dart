@@ -23,7 +23,7 @@ abstract class UpdateTaskRepo {
 
 //************ Delete Task **********
 abstract class DeleteTaskRepo {
-  Future<Either<Failure, DeletetaskResponse>> deleteTask({
+  Future<Either<Failure, DeleteTaskResponse>> deleteTask({
     required DeleteTaskModel payload,
   });
 }
