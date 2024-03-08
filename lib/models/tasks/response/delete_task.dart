@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'delete_task.g.dart';
 
 @JsonSerializable()
-class DeletetaskResponse {
+class DeleteTaskResponse {
     @JsonKey(name: "status")
     final bool status;
     @JsonKey(name: "text")
@@ -19,7 +19,7 @@ class DeletetaskResponse {
     @JsonKey(name: "error")
     final List<dynamic> error;
 
-    DeletetaskResponse({
+    DeleteTaskResponse({
         required this.status,
         required this.text,
         required this.data,
@@ -29,7 +29,7 @@ class DeletetaskResponse {
         required this.error,
     });
 
-    factory DeletetaskResponse.fromJson(Map<String, dynamic> json) => _$DeletetaskResponseFromJson(json);
+    factory DeleteTaskResponse.fromJson(Map<String, dynamic> json) => _$DeleteTaskResponseFromJson(json);
 
-    Map<String, dynamic> toJson() => _$DeletetaskResponseToJson(this);
+    Map<String, dynamic> toJson() => _$DeleteTaskResponseToJson(this);
 }

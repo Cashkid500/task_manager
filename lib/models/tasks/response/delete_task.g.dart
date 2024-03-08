@@ -6,8 +6,8 @@ part of 'delete_task.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DeletetaskResponse _$DeletetaskResponseFromJson(Map<String, dynamic> json) =>
-    DeletetaskResponse(
+DeleteTaskResponse _$DeleteTaskResponseFromJson(Map<String, dynamic> json) =>
+    DeleteTaskResponse(
       status: json['status'] as bool,
       text: json['text'] as String,
       data: json['data'] as List<dynamic>,
@@ -17,7 +17,7 @@ DeletetaskResponse _$DeletetaskResponseFromJson(Map<String, dynamic> json) =>
       error: json['error'] as List<dynamic>,
     );
 
-Map<String, dynamic> _$DeletetaskResponseToJson(DeletetaskResponse instance) =>
+Map<String, dynamic> _$DeleteTaskResponseToJson(DeleteTaskResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'text': instance.text,
