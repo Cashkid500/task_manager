@@ -21,7 +21,7 @@ abstract class UpdateTaskSource {
 
 //************ Delete Task **********
 abstract class DeleteTaskSource {
-  Future<DeletetaskResponse> deleteTask({
+  Future<DeleteTaskResponse> deleteTask({
     required DeleteTaskModel payload,
   });
 }
