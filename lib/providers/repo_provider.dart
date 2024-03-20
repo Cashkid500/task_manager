@@ -16,3 +16,8 @@ final updateTaskRepositoryProvider = Provider<UpdateTaskRepo>(
 final deleteTaskRepositoryProvider = Provider<DeleteTaskRepo>(
   (ref) => DeleteTaskRepoImpl(ref: ref),
   );
+
+//************ Get Task Repository Provider ************
+final getTaskRepositoryProvider = Provider<GetTaskRepo>(
+  (ref) => GetTaskRepoImpl(ref: ref),
+);
