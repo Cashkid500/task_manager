@@ -9,6 +9,7 @@ import 'package:task_manager/models/tasks/body/delete_task.dart';
 import 'package:task_manager/models/tasks/body/update_task.dart';
 import 'package:task_manager/models/tasks/response/create_task.dart';
 import 'package:task_manager/models/tasks/response/delete_task.dart';
+import 'package:task_manager/models/tasks/response/get_task.dart';
 import 'package:task_manager/models/tasks/response/update_task.dart';
 
 //************ Create Task **********
@@ -161,6 +162,54 @@ class DeleteTaskSourceImpl implements DeleteTaskSource {
     } else {
       final DeleteTaskResponse responseModel =
           DeleteTaskResponse.fromJson(data);
+      try {
+        if (responseModel.status == false) {
+          throw Exception(data['text']);
+        } else {
+          final errorMessage = data['text'];
+          throw Exception(errorMessage);
+        }
+      } on Exception catch (_) {
+        rethrow;
+      }
+    }
+  }
+}
+
+//************ Get Task **********
+class GetTaskSourceImpl implements GetTaskSource {
+  final NetworkRequest networkRequest;
+  final NetworkRetry networkRetry;
+
+  GetTaskSourceImpl({
+    required this.networkRequest,
+    required this.networkRetry,
+  });
+
+  @override
+  Future<GetTaskResponse> getTask() async {
+    String url = AppEndpoints.getTask;
+    final response = await networkRetry.networkRetry(
+      () => networkRequest.get(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
+    );
+    log(response.body);
+    final data = await json.decode(response.body);
+    if (response.statusCode == 200) {
+      try {
+        final GetTaskResponse responseModel =
+            GetTaskResponse.fromJson(data);
+        return responseModel;
+      } on Exception catch (_) {
+        rethrow;
+      }
+    } else {
+      final GetTaskResponse responseModel =
+          GetTaskResponse.fromJson(data);
       try {
         if (responseModel.status == false) {
           throw Exception(data['text']);
