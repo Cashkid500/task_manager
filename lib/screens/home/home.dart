@@ -1,27 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
+import 'package:task_manager/providers/state_provider/tasks/tasks_provider.dart';
 import 'package:task_manager/screens/add%20task/add_task.dart';
 import 'package:task_manager/screens/history/history.dart';
 import 'package:task_manager/screens/settings/settings.dart';
 import 'package:task_manager/screens/update%20task/update_task.dart';
+import 'package:task_manager/state/tasks/tasks_state.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool isChecked = false;
+
+  void handleGetTask() {
+    ref.read(getTaskStateNotifierProvider.notifier).getTask();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final GetTaskState = ref.watch(getTaskStateNotifierProvider);
+    if (GetTaskState is GetTaskSuccess) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(getTaskStateNotifierProvider.notifier).resetState();
+        // responseData = GetTaskState.responseData;
+        AppSnackbar errorToast = AppSnackbar(context);
+        errorToast.showToast(text: "Data fetched successfully");
+      });
+    } else if (GetTaskState is GetTaskFailure) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(getTaskStateNotifierProvider.notifier).resetState();
+        AppSnackbar errorToast = AppSnackbar(context, isError: true);
+        errorToast.showToast(text: GetTaskState.failure.message);
+      });
+    }
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AddTaskScreen())),
+        onPressed: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AddTaskScreen())),
         backgroundColor: whiteText,
         focusColor: blackText,
         shape: const CircleBorder(),
@@ -29,15 +53,17 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Column(
-            children: [
+          child: Column(children: [
             Padding(
               padding: EdgeInsets.only(left: 20.sp, top: 20.sp, right: 20.sp),
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateTaskScreen())),
-                    child: const Icon(Icons.apps)),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const UpdateTaskScreen())),
+                      child: const Icon(Icons.apps)),
 
                   SizedBox(width: 30.sp),
 
@@ -67,14 +93,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 60.sp),
 
                   GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryScreen())),
-                    child: Icon(Icons.history_outlined, color: blackText, size: 25.sp)),
-                  
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HistoryScreen())),
+                      child: Icon(Icons.history_outlined,
+                          color: blackText, size: 25.sp)),
+
                   SizedBox(width: 30.sp),
 
                   GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())),
-                    child: Icon(Icons.settings_outlined, color: blackText, size: 25.sp)),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SettingsScreen())),
+                      child: Icon(Icons.settings_outlined,
+                          color: blackText, size: 25.sp)),
                 ],
               ),
             ),
@@ -147,6 +181,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
+
+                // if (GetTaskState is GetTaskLoading)
+                //           const Center(
+                //             child: CircularProgressIndicator(),
+                //           )
+                //     else handleGetTask()
                       ]),
                 ),
 
