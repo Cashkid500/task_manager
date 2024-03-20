@@ -1,6 +1,7 @@
 import 'package:task_manager/core/failures/failures.dart';
 import 'package:task_manager/models/tasks/response/create_task.dart';
 import 'package:task_manager/models/tasks/response/delete_task.dart';
+import 'package:task_manager/models/tasks/response/get_task.dart';
 import 'package:task_manager/models/tasks/response/update_task.dart';
 
 //************ Create Task State **********
@@ -52,4 +53,21 @@ class DeleteTaskFailure extends DeleteTaskState {
 class DeleteTaskSuccess extends DeleteTaskState {
   final DeleteTaskResponse responseData;
   DeleteTaskSuccess({required this.responseData});
+}
+
+//************ Get Task State **********
+class GetTaskState {}
+
+class GetTaskInitial extends GetTaskState {}
+
+class GetTaskLoading extends GetTaskState {}
+
+class GetTaskFailure extends GetTaskState {
+  final Failure failure;
+  GetTaskFailure({required this.failure});
+}
+
+class GetTaskSuccess extends GetTaskState {
+  final GetTaskResponse responseData;
+  GetTaskSuccess({required this.responseData});
 }
