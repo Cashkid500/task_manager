@@ -99,3 +99,32 @@ class DeleteTaskStateNotifier extends StateNotifier<DeleteTaskState> {
     state = DeleteTaskInitial();
   }
 }
+
+//************ Get Task State Notifier ************
+class GetTaskStateNotifier extends StateNotifier<GetTaskState> {
+  final GetTaskRepo _getTaskRepository;
+
+  GetTaskStateNotifier(Ref ref)
+      : _getTaskRepository = ref.read(getTaskRepositoryProvider),
+        super(GetTaskInitial());
+
+  Future<void> getTask() async {
+    state = GetTaskLoading();
+
+    final userTransactionListOrError =
+        await _getTaskRepository.getTask();
+    print(userTransactionListOrError.all);
+    state = userTransactionListOrError.fold(
+      (l) => GetTaskFailure(failure: l),
+      (r) => GetTaskSuccess(responseData: r),
+    );
+
+    if (state is GetTaskFailure) {
+      final failureState = state as GetTaskFailure;
+    } else if (state is GetTaskSuccess) {}
+  }
+
+  void resetState() {
+    state = GetTaskInitial();
+  }
+}
