@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:task_manager/constants/app_api_endpoint.dart';
 import 'package:task_manager/core/network/network_request.dart';
 import 'package:task_manager/core/network/network_retry.dart';
@@ -38,6 +39,7 @@ class CreateTaskSourceImpl implements CreateTaskSource {
         },
       ),
     );
+    log(response.body);
     final data = await json.decode(response.body);
     if (response.statusCode == 200) {
       try {
@@ -93,6 +95,7 @@ class UpdateTaskSourceImpl implements UpdateTaskSource {
         },
       ),
     );
+    log(response.body);
     final data = await json.decode(response.body);
     if (response.statusCode == 200) {
       try {
@@ -145,6 +148,7 @@ class DeleteTaskSourceImpl implements DeleteTaskSource {
         },
       ),
     );
+    log(response.body);
     final data = await json.decode(response.body);
     if (response.statusCode == 200) {
       try {
