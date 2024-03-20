@@ -19,3 +19,9 @@ final deleteTaskStateNotifierProvider =
     StateNotifierProvider<DeleteTaskStateNotifier, DeleteTaskState>(
   (ref) => DeleteTaskStateNotifier(ref),
 );
+
+//************ Get Task Provider ************
+final getTaskStateNotifierProvider =
+    StateNotifierProvider<GetTaskStateNotifier, GetTaskState>(
+  (ref) => GetTaskStateNotifier(ref),
+);
