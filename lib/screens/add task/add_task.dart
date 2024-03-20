@@ -46,21 +46,22 @@ class _AddTaskScreenState extends ConsumerState<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final createTaskState = ref.watch(createTaskStateNotifierProvider);
-    if (createTaskState is CreateTaskSuccess) {
+    final CreateTaskState = ref.watch(createTaskStateNotifierProvider);
+    if (CreateTaskState is CreateTaskSuccess) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(createTaskStateNotifierProvider.notifier).resetState();
-        // responseData = createTaskState.responseData;
+        // responseData = CreateTaskState.responseData;
         AppSnackbar errorToast = AppSnackbar(context);
-        errorToast.showToast(text: "Task created successfully");
+        errorToast.showToast(text: TaskManagerText.successResponse);
 
-        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => const HomeScreen()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => const HomeScreen()));
       });
-    } else if (createTaskState is CreateTaskFailure) {
+    } else if (CreateTaskState is CreateTaskFailure) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(createTaskStateNotifierProvider.notifier).resetState();
         AppSnackbar errorToast = AppSnackbar(context, isError: true);
-        errorToast.showToast(text: createTaskState.failure.message);
+        errorToast.showToast(text: CreateTaskState.failure.message);
       });
     }
     return Scaffold(
@@ -132,19 +133,39 @@ class _AddTaskScreenState extends ConsumerState<AddTaskScreen> {
             ),
 
             SizedBox(height: 40.sp),
-            if (createTaskState is CreateTaskLoading)
+
+            if (CreateTaskState is CreateTaskLoading)
               const Center(
                 child: CircularProgressIndicator(),
-                ),
+              )
 
-                // else
+            else
             //********* Add Button *********/
             AddButton(
                 textPath: TaskManagerText.add,
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeScreen()))),
+                onTap: () {
+                  if (titleController.text.isEmpty &&
+                        descriptionController.text.isEmpty &&
+                        dateController.text.isEmpty) {
+                      AppSnackbar errorToast =
+                          AppSnackbar(context, isError: true);
+                      errorToast.showToast(text: TaskManagerText.enterAllFields);
+                    } else if (titleController.text.isEmpty) {
+                      AppSnackbar errorToast =
+                          AppSnackbar(context, isError: true);
+                      errorToast.showToast(text: TaskManagerText.enterTitle);
+                    } else if (descriptionController.text.isEmpty) {
+                      AppSnackbar errorToast =
+                          AppSnackbar(context, isError: true);
+                      errorToast.showToast(text: TaskManagerText.enterDescription);
+                    } else if (dateController.text.isEmpty) {
+                      AppSnackbar errorToast =
+                          AppSnackbar(context, isError: true);
+                      errorToast.showToast(text: TaskManagerText.enterDate);
+                    } else {
+                      handleAddTask();
+                    }
+                }),
           ]),
         ),
       ),
