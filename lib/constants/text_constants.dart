@@ -16,6 +16,11 @@ class TaskManagerText {
   static const String title = "Title";
   static const String dateText = "Date";
   static const String description = "Description";
+  static const String successResponse = "Task created successfully";
+  static const String enterAllFields = "Please fill all the fields";
+  static const String enterTitle = "Please enter title";
+  static const String enterDescription = "Please enter description";
+  static const String enterDate = "Please enter date";
 
 //*****************  History Texts *************************
   static const String history = "History";
