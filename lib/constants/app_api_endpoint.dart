@@ -10,5 +10,6 @@ class AppEndpoints {
   //************** Delete Task *************/
   static const deleteTask = '$_base/delete_task.php';
 
-  
+  //************** Get Task *************/
+  static const getTask = '$_base/get_task.php';
 }
