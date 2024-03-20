@@ -10,6 +10,7 @@ import 'package:task_manager/models/tasks/body/delete_task.dart';
 import 'package:task_manager/models/tasks/body/update_task.dart';
 import 'package:task_manager/models/tasks/response/create_task.dart';
 import 'package:task_manager/models/tasks/response/delete_task.dart';
+import 'package:task_manager/models/tasks/response/get_task.dart';
 import 'package:task_manager/models/tasks/response/update_task.dart';
 import 'package:task_manager/providers/network_provider.dart';
 import 'package:task_manager/providers/source_provider.dart';
@@ -80,4 +81,24 @@ class DeleteTaskRepoImpl implements DeleteTaskRepo {
           errorTitle: "Task Not Deleted",
         );
     }
+}
+
+//************ Get Task ************/
+class GetTaskRepoImpl implements GetTaskRepo {
+  final NetworkInfo fetch;
+  final GetTaskSource task;
+
+  GetTaskRepoImpl({required Ref ref})
+      : task = ref.read(getTaskSourceProvider),
+        fetch = ref.read(networkInfoProvider);
+
+  @override
+  Future<Either<Failure, GetTaskResponse>> getTask() async {
+    ServiceRunner<Failure, GetTaskResponse> sR = ServiceRunner(fetch);
+
+    return sR.tryRemoteandCatch(
+      call: task.getTask(),
+      errorTitle: "Task Not Fetched",
+    );
+  }
 }
