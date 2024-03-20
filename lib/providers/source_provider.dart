@@ -26,3 +26,11 @@ final deleteTaskSourceProvider = Provider<DeleteTaskSource>(
     networkRetry: ref.read(networkRetryProvider),
     ),
   );
+
+//************ Get Task Source Provider **********
+final getTaskSourceProvider = Provider<GetTaskSource>(
+  (ref) => GetTaskSourceImpl(
+    networkRequest: ref.read(networkRequestProvider),
+    networkRetry: ref.read(networkRetryProvider),
+  ),
+);
