@@ -38,4 +38,5 @@ class TaskManagerText {
   static const String updateTask = "Update Task";
   static const String update = "Update";
   static const String delete = "Delete";
+  static const String updateTaskSuccessResponse = "Task Updated Successfully";
 }
