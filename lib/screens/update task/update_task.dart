@@ -56,7 +56,7 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
         ref.read(updateTaskStateNotifierProvider.notifier).resetState();
         // responseData = UpdateTaskState.responseData;
         AppSnackbar errorToast = AppSnackbar(context);
-        errorToast.showToast(text: "Task Updated Successfully");
+        errorToast.showToast(text: TaskManagerText.updateTaskSuccessResponse);
         Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) => const HomeScreen()));
       });
