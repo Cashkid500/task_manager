@@ -88,7 +88,7 @@ class UpdateTaskSourceImpl implements UpdateTaskSource {
       "date": payload.date,
     };
     final response = await networkRetry.networkRetry(
-      () => networkRequest.put(
+      () => networkRequest.post(
         url,
         body: json.encode(body),
         headers: {
@@ -141,7 +141,7 @@ class DeleteTaskSourceImpl implements DeleteTaskSource {
       "trackid": payload.trackid,
     };
     final response = await networkRetry.networkRetry(
-      () => networkRequest.delete(
+      () => networkRequest.post(
         url,
         body: json.encode(body),
         headers: {

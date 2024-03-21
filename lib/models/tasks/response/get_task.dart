@@ -72,13 +72,13 @@ class Task {
   @JsonKey(name: "description")
   final String description;
   @JsonKey(name: "date")
-  final DateTime date;
+  final String date;
   @JsonKey(name: "status")
   final int status;
   @JsonKey(name: "created_at")
-  final DateTime createdAt;
+  final String createdAt;
   @JsonKey(name: "updated_at")
-  final DateTime updatedAt;
+  final String updatedAt;
   @JsonKey(name: "status_value")
   final String statusValue;
 
