@@ -68,10 +68,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Row(
                 children: [
                   GestureDetector(
-                      // onTap: () => Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const UpdateTaskScreen())),
                       child: const Icon(Icons.apps)),
 
                   SizedBox(width: 30.sp),
