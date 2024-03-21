@@ -51,10 +51,10 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       trackid: json['trackid'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
-      date: DateTime.parse(json['date'] as String),
+      date: json['date'] as String,
       status: json['status'] as int,
-      createdAt: DateTime.parse(json['created_at'] as String),
-      updatedAt: DateTime.parse(json['updated_at'] as String),
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
       statusValue: json['status_value'] as String,
     );
 
@@ -63,9 +63,9 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'trackid': instance.trackid,
       'title': instance.title,
       'description': instance.description,
-      'date': instance.date.toIso8601String(),
+      'date': instance.date,
       'status': instance.status,
-      'created_at': instance.createdAt.toIso8601String(),
-      'updated_at': instance.updatedAt.toIso8601String(),
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
       'status_value': instance.statusValue,
     };
