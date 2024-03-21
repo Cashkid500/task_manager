@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
+import 'package:task_manager/models/tasks/response/get_task.dart';
 import 'package:task_manager/providers/state_provider/tasks/tasks_provider.dart';
 import 'package:task_manager/screens/add%20task/add_task.dart';
 import 'package:task_manager/screens/history/history.dart';
@@ -20,9 +21,18 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool isChecked = false;
+  GetTaskResponse? tasks;
 
   void handleGetTask() {
     ref.read(getTaskStateNotifierProvider.notifier).getTask();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      handleGetTask();
+    });
   }
 
   @override
@@ -30,10 +40,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final GetTaskState = ref.watch(getTaskStateNotifierProvider);
     if (GetTaskState is GetTaskSuccess) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(getTaskStateNotifierProvider.notifier).resetState();
-        // responseData = GetTaskState.responseData;
-        AppSnackbar errorToast = AppSnackbar(context);
-        errorToast.showToast(text: "Data fetched successfully");
+        setState(() {
+          tasks = GetTaskState.responseData;
+        });
       });
     } else if (GetTaskState is GetTaskFailure) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -59,10 +68,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Row(
                 children: [
                   GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const UpdateTaskScreen())),
+                      // onTap: () => Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const UpdateTaskScreen())),
                       child: const Icon(Icons.apps)),
 
                   SizedBox(width: 30.sp),
@@ -138,72 +147,90 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             SizedBox(height: 20.sp),
 
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20.sp),
+            if (GetTaskState is GetTaskLoading || tasks == null) ...[
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ] else ...[
+              ...List.generate(
+                tasks!.data.tasks.length,
+                (index) => GestureDetector(
+                  onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  UpdateTaskScreen(id: tasks!.data.tasks[index].trackid))),
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //*********  Title *********/
-                        Text(
-                          TaskManagerText.api,
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            color: blackText,
-                            fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                            fontWeight: FontWeight.normal,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.sp),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //*********  Title *********/
+                                  Text(
+                                    tasks!.data.tasks[index].title,
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      color: blackText,
+                                      fontFamily:
+                                          TaskManagerAssetsPath.taskManagerFont,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                  
+                                  SizedBox(height: 5.sp),
+                  
+                                  //*********  Description *********/
+                                  Text(
+                                    tasks!.data.tasks[index].description,
+                                    style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color: blackText,
+                                      fontFamily:
+                                          TaskManagerAssetsPath.taskManagerFont,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                  
+                                  SizedBox(height: 5.sp),
+                  
+                                  //*********  Date *********/
+                                  Text(
+                                    tasks!.data.tasks[index].date,
+                                    style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color: blackText,
+                                      fontFamily:
+                                          TaskManagerAssetsPath.taskManagerFont,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  if (index != tasks!.data.tasks.length - 1) SizedBox(height: 20.sp),
+                                ]),
                           ),
-                        ),
-
-                        SizedBox(height: 5.sp),
-
-                        //*********  Description *********/
-                        Text(
-                          TaskManagerText.handles,
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            color: blackText,
-                            fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                            fontWeight: FontWeight.normal,
+                  
+                          //*********  Checkbox *********/
+                          Checkbox(
+                            value: isChecked,
+                            checkColor: blackText,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = value ?? false;
+                              });
+                            },
                           ),
-                        ),
-
-                        SizedBox(height: 5.sp),
-
-                        //*********  Date *********/
-                        Text(
-                          TaskManagerText.date,
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            color: blackText,
-                            fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-
-                // if (GetTaskState is GetTaskLoading)
-                //           const Center(
-                //             child: CircularProgressIndicator(),
-                //           )
-                //     else handleGetTask()
-                      ]),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-
-                SizedBox(width: 50.sp),
-
-                //*********  Checkbox *********/
-                Checkbox(
-                  value: isChecked,
-                  checkColor: blackText,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value ?? false;
-                    });
-                  },
-                ),
-              ],
-            ),
+              ),
+            ],
           ]),
         ),
       ),
