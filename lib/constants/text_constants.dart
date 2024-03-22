@@ -26,6 +26,7 @@ class TaskManagerText {
   static const String history = "History";
   static const String completed = "You have completed [1] tasks";
   static const String taskReassigned = "Task reassigned";
+  static const String deleteTaskSuccessResponse = "Task Deleted Successfully";
 
 //*****************  Settings Texts *************************
   static const String settings = "Settings";
