@@ -155,74 +155,76 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>  UpdateTaskScreen(id: tasks!.data.tasks[index].trackid))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 20.sp),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //*********  Title *********/
-                                  Text(
-                                    tasks!.data.tasks[index].title,
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      color: blackText,
-                                      fontFamily:
-                                          TaskManagerAssetsPath.taskManagerFont,
-                                      fontWeight: FontWeight.normal,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 20.sp),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    //*********  Title *********/
+                                    Text(
+                                      tasks!.data.tasks[index].title,
+                                      style: TextStyle(
+                                        fontSize: 20.sp,
+                                        color: blackText,
+                                        fontFamily:
+                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontWeight: FontWeight.normal,
+                                      ),
                                     ),
-                                  ),
-                  
-                                  SizedBox(height: 5.sp),
-                  
-                                  //*********  Description *********/
-                                  Text(
-                                    tasks!.data.tasks[index].description,
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: blackText,
-                                      fontFamily:
-                                          TaskManagerAssetsPath.taskManagerFont,
-                                      fontWeight: FontWeight.normal,
+                    
+                                    SizedBox(height: 5.sp),
+                    
+                                    //*********  Description *********/
+                                    Text(
+                                      tasks!.data.tasks[index].description,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: blackText,
+                                        fontFamily:
+                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontWeight: FontWeight.normal,
+                                      ),
                                     ),
-                                  ),
-                  
-                                  SizedBox(height: 5.sp),
-                  
-                                  //*********  Date *********/
-                                  Text(
-                                    tasks!.data.tasks[index].date,
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: blackText,
-                                      fontFamily:
-                                          TaskManagerAssetsPath.taskManagerFont,
-                                      fontWeight: FontWeight.normal,
+                    
+                                    SizedBox(height: 5.sp),
+                    
+                                    //*********  Date *********/
+                                    Text(
+                                      tasks!.data.tasks[index].date,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: blackText,
+                                        fontFamily:
+                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontWeight: FontWeight.normal,
+                                      ),
                                     ),
-                                  ),
-                                  if (index != tasks!.data.tasks.length - 1) SizedBox(height: 20.sp),
-                                ]),
-                          ),
-                  
-                          //*********  Checkbox *********/
-                          Checkbox(
-                            value: isChecked,
-                            checkColor: blackText,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isChecked = value ?? false;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
+                                    if (index != tasks!.data.tasks.length - 1) SizedBox(height: 20.sp),
+                                  ]),
+                            ),
+                    
+                            //*********  Checkbox *********/
+                            Checkbox(
+                              value: isChecked,
+                              checkColor: blackText,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isChecked = value ?? false;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
