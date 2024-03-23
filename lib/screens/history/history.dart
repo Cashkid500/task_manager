@@ -13,7 +13,8 @@ import 'package:task_manager/screens/home/home.dart';
 import 'package:task_manager/state/tasks/tasks_state.dart';
 
 class HistoryScreen extends ConsumerStatefulWidget {
-  const HistoryScreen({super.key, 
+  const HistoryScreen({
+    super.key,
   });
 
   @override
@@ -31,7 +32,9 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
     required String id,
   }) {
     DeleteTaskModel data = DeleteTaskModel(trackid: id);
-    ref.read(deleteTaskStateNotifierProvider.notifier).deleteTask(payload: data);
+    ref
+        .read(deleteTaskStateNotifierProvider.notifier)
+        .deleteTask(payload: data);
   }
 
   @override
@@ -41,7 +44,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
       handleGetTask();
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final GetTaskState = ref.watch(getTaskStateNotifierProvider);
@@ -64,8 +67,8 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(deleteTaskStateNotifierProvider.notifier).resetState();
         // responseData = DeleteTaskState.responseData;
-        // AppSnackbar errorToast = AppSnackbar(context);
-        // errorToast.showToast(text: TaskManagerText.deleteTaskSuccessResponse);
+        AppSnackbar errorToast = AppSnackbar(context);
+        errorToast.showToast(text: TaskManagerText.deleteTaskSuccessResponse);
         Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) => const HomeScreen()));
       });
@@ -77,140 +80,144 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
       });
     }
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.only(bottom: 20.sp),
-          child: Column(
-            children: [
-            //*********  Header *********/
-            const HeaderWidget(rowTextPath: TaskManagerText.history,),
-
-            SizedBox(height: 30.sp),
-
-            //********* Container *********/
-            Container(
-              height: 40.sp,
-              width: 310.sp,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(240, 240, 240, 1.0),
-                borderRadius: BorderRadius.circular(10.sp),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(bottom: 20.sp),
+            child: Column(
+              children: [
+              //*********  Header *********/
+              const HeaderWidget(
+                rowTextPath: TaskManagerText.history,
               ),
-              child: Center(
-                child: Text(
-                  TaskManagerText.completed,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    color: Colors.blueGrey,
-                    fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                    fontWeight: FontWeight.normal,
-                  ),
+        
+              SizedBox(height: 30.sp),
+        
+              //********* Container *********/
+              Container(
+                height: 40.sp,
+                width: 310.sp,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(240, 240, 240, 1.0),
+                  borderRadius: BorderRadius.circular(10.sp),
                 ),
-              ),
-            ),
-
-            SizedBox(height: 20.sp),
-
-            
-            if (GetTaskState is GetTaskLoading || tasks == null) ...[
-              const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ] else ...[
-              ...List.generate(
-                tasks!.data.tasks.length,
-                (index) => Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 10.sp),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 20.sp),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //*********  Title *********/
-                                  Text(
-                                    tasks!.data.tasks[index].title,
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      color: blackText,
-                                      fontFamily:
-                                          TaskManagerAssetsPath.taskManagerFont,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                      
-                                  SizedBox(height: 5.sp),
-                                      
-                                  //*********  Description *********/
-                                  Text(
-                                    tasks!.data.tasks[index].description,
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: blackText,
-                                      fontFamily:
-                                          TaskManagerAssetsPath.taskManagerFont,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                      
-                                  SizedBox(height: 5.sp),
-                                      
-                                  //*********  Date *********/
-                                  Text(
-                                    tasks!.data.tasks[index].date,
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: blackText,
-                                      fontFamily:
-                                          TaskManagerAssetsPath.taskManagerFont,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                  if (index != tasks!.data.tasks.length - 1)
-                                    SizedBox(height: 20.sp),
-                                ]),
-                          ),
-                                      
-                          //*********  Delete Icon *********/
-                          GestureDetector(
-                            onTap: () => handleDeleteTask(id: tasks!.data.tasks[index].trackid),
-                            child: const Icon(Icons.restore_from_trash, color: Colors.red)),
-                        ],
-                      ),
+                child: Center(
+                  child: Text(
+                    TaskManagerText.completed,
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.blueGrey,
+                      fontFamily: TaskManagerAssetsPath.taskManagerFont,
+                      fontWeight: FontWeight.normal,
                     ),
-                  ],
-                ),
-              ),
-            ],
-
-            
-            const Spacer(),
-
-            Container(
-              height: 40.sp,
-              width: 160.sp,
-              decoration: BoxDecoration(
-                color: blackText,
-                borderRadius: BorderRadius.circular(30.sp),
-              ),
-              child: Center(
-                child: Text(
-                  TaskManagerText.taskReassigned,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    color: whiteText,
-                    fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
-            ),
-          ]),
+        
+              SizedBox(height: 20.sp),
+        
+              if (GetTaskState is GetTaskLoading || tasks == null) ...[
+                const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ] else ...[
+                ...List.generate(
+                  tasks!.data.tasks.length,
+                  (index) => Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 10.sp),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 20.sp),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    //*********  Title *********/
+                                    Text(
+                                      tasks!.data.tasks[index].title,
+                                      style: TextStyle(
+                                        fontSize: 20.sp,
+                                        color: blackText,
+                                        fontFamily:
+                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                  
+                                    SizedBox(height: 5.sp),
+                  
+                                    //*********  Description *********/
+                                    Text(
+                                      tasks!.data.tasks[index].description,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: blackText,
+                                        fontFamily:
+                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                  
+                                    SizedBox(height: 5.sp),
+                  
+                                    //*********  Date *********/
+                                    Text(
+                                      tasks!.data.tasks[index].date,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: blackText,
+                                        fontFamily:
+                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    if (index != tasks!.data.tasks.length - 1)
+                                      SizedBox(height: 20.sp),
+                                  ]),
+                            ),
+                  
+                            //*********  Delete Icon *********/
+                            GestureDetector(
+                                onTap: () => handleDeleteTask(
+                                    id: tasks!.data.tasks[index].trackid),
+                                child: const Icon(Icons.restore_from_trash,
+                                    color: Colors.red)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+        
+              // const Spacer(),
+        
+              // Container(
+              //   height: 40.sp,
+              //   width: 160.sp,
+              //   decoration: BoxDecoration(
+              //     color: blackText,
+              //     borderRadius: BorderRadius.circular(30.sp),
+              //   ),
+              //   child: Center(
+              //     child: Text(
+              //       TaskManagerText.taskReassigned,
+              //       style: TextStyle(
+              //         fontSize: 15.sp,
+              //         color: whiteText,
+              //         fontFamily: TaskManagerAssetsPath.taskManagerFont,
+              //         fontWeight: FontWeight.normal,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ]),
+          ),
         ),
       ),
     );
