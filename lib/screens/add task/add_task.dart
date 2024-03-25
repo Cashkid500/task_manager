@@ -68,11 +68,10 @@ class _AddTaskScreenState extends ConsumerState<AddTaskScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Column(children: [
+          child: Column(
+            children: [
             //*********  Header *********/
-            const HeaderWidget(
-              rowTextPath: TaskManagerText.addTask,
-            ),
+            const HeaderWidget(rowTextPath: TaskManagerText.addTask),
 
             SizedBox(height: 60.sp),
 
