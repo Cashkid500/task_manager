@@ -87,9 +87,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
             child: Column(
               children: [
               //*********  Header *********/
-              const HeaderWidget(
-                rowTextPath: TaskManagerText.history,
-              ),
+              const HeaderWidget(rowTextPath: TaskManagerText.history),
         
               SizedBox(height: 30.sp),
         
