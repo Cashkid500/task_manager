@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
-import 'package:task_manager/screens/add%20task/add_task.dart';
-import 'package:task_manager/screens/home/home.dart';
+import 'package:task_manager/screens/add%20task/widget.dart';
+import 'package:task_manager/screens/settings/widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -141,20 +141,3 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-class Dividing extends StatelessWidget {
-  const Dividing({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100.sp,
-      width: 310.sp,
-      child: Divider(
-        color: Colors.grey,
-        thickness: 1.5.sp,
-      ),
-    );
-  }
-}
