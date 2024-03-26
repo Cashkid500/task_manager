@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:task_manager/constants/asset_path.dart';
-import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
 import 'package:task_manager/models/tasks/body/update_task.dart';
 import 'package:task_manager/providers/state_provider/tasks/tasks_provider.dart';
-import 'package:task_manager/screens/add%20task/add_task.dart';
+import 'package:task_manager/screens/add%20task/widget.dart';
 import 'package:task_manager/screens/home/home.dart';
 import 'package:task_manager/state/tasks/tasks_state.dart';
 
@@ -50,8 +48,8 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final UpdateTaskState = ref.watch(updateTaskStateNotifierProvider);
-    if (UpdateTaskState is UpdateTaskSuccess) {
+    final updateTaskState = ref.watch(updateTaskStateNotifierProvider);
+    if (updateTaskState is UpdateTaskSuccess) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(updateTaskStateNotifierProvider.notifier).resetState();
         // responseData = UpdateTaskState.responseData;
@@ -60,11 +58,11 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) => const HomeScreen()));
       });
-    } else if (UpdateTaskState is UpdateTaskFailure) {
+    } else if (updateTaskState is UpdateTaskFailure) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(updateTaskStateNotifierProvider.notifier).resetState();
         AppSnackbar errorToast = AppSnackbar(context, isError: true);
-        errorToast.showToast(text: UpdateTaskState.failure.message);
+        errorToast.showToast(text: updateTaskState.failure.message);
       });
     }
     return Scaffold(
@@ -98,42 +96,8 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
 
             SizedBox(height: 40.sp),
 
-            //********* Date TextField *********/
-            SizedBox(
-              height: 54.sp,
-              width: 320.sp,
-              child: TextField(
-                keyboardType: TextInputType.datetime,
-                readOnly: true,
-                controller: dateController,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.r)),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20.sp, vertical: 20.sp),
-                  isCollapsed: true,
-                  labelText: TaskManagerText.dateText,
-                  labelStyle: TextStyle(
-                    fontSize: 15.sp,
-                    color: blackText,
-                    fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                    fontWeight: FontWeight.normal,
-                  ),
-                  prefixIcon: GestureDetector(
-                      onTap: () => onTapFunction(context: context),
-                      child: const Icon(Icons.calendar_today_outlined)),
-                  filled: true,
-                  fillColor: whiteText,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                    borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5.sp,
-                        style: BorderStyle.solid),
-                  ),
-                ),
-              ),
-            ),
+            //********* Date TextField *********/ 
+            DateFieldWidget(dateController: dateController, onTap: () => onTapFunction(context: context),),
 
             SizedBox(height: 40.sp),
 
@@ -171,14 +135,6 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
               ),
 
             SizedBox(height: 20.sp),
-
-            //********* Delete Button *********/
-            AddButton(
-                textPath: TaskManagerText.delete,
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeScreen()))),
           ]),
         ),
       ),
