@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
-import 'package:task_manager/constants/text_constants.dart';
 import 'package:task_manager/models/tasks/response/get_task.dart';
 import 'package:task_manager/providers/state_provider/tasks/tasks_provider.dart';
 import 'package:task_manager/screens/add%20task/add_task.dart';
+import 'package:task_manager/screens/add%20task/widget.dart';
 import 'package:task_manager/screens/history/history.dart';
+import 'package:task_manager/screens/home/widget.dart';
 import 'package:task_manager/screens/settings/settings.dart';
 import 'package:task_manager/screens/update%20task/update_task.dart';
 import 'package:task_manager/state/tasks/tasks_state.dart';
@@ -37,18 +38,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final GetTaskState = ref.watch(getTaskStateNotifierProvider);
-    if (GetTaskState is GetTaskSuccess) {
+    final getTaskState = ref.watch(getTaskStateNotifierProvider);
+    if (getTaskState is GetTaskSuccess) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
-          tasks = GetTaskState.responseData;
+          tasks = getTaskState.responseData;
         });
       });
-    } else if (GetTaskState is GetTaskFailure) {
+    } else if (getTaskState is GetTaskFailure) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(getTaskStateNotifierProvider.notifier).resetState();
         AppSnackbar errorToast = AppSnackbar(context, isError: true);
-        errorToast.showToast(text: GetTaskState.failure.message);
+        errorToast.showToast(text: getTaskState.failure.message);
       });
     }
     return Scaffold(
@@ -73,28 +74,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   SizedBox(width: 30.sp),
 
                   //*********  Task Manager Text *********/
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: TaskManagerText.task,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.normal,
-                          fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                        ),
-                      ),
-                      TextSpan(
-                        text: TaskManagerText.manager,
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.normal,
-                          fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                        ),
-                      ),
-                    ]),
-                  ),
+                  const RichTextWidget(),
                   SizedBox(width: 60.sp),
 
                   GestureDetector(
@@ -120,26 +100,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             SizedBox(height: 20.sp),
 
-            //*********  Container *********/
-            Container(
-              height: 40.sp,
-              width: 310.sp,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(240, 240, 240, 1.0),
-                borderRadius: BorderRadius.circular(10.sp),
-              ),
-              child: Center(
-                child: Text(
-                  TaskManagerText.pending,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    color: Colors.blueGrey,
-                    fontFamily: TaskManagerAssetsPath.taskManagerFont,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ),
-            ),
+            //********* Pending Task Container *********/
+            const PendingTaskWidget(),
 
             SizedBox(height: 20.sp),
 
@@ -168,7 +130,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  //*********  Title *********/
+                                  //*********  Title FormField *********/
                                   Text(
                                     tasks!.data.tasks[index].title,
                                     style: TextStyle(
@@ -182,7 +144,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                                   SizedBox(height: 5.sp),
 
-                                  //*********  Description *********/
+                                  //*********  Description FormField *********/
                                   Text(
                                     tasks!.data.tasks[index].description,
                                     style: TextStyle(
@@ -196,7 +158,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                                   SizedBox(height: 5.sp),
 
-                                  //*********  Date *********/
+                                  //*********  Date FormField *********/
                                   Text(
                                     tasks!.data.tasks[index].date,
                                     style: TextStyle(
@@ -236,3 +198,4 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
+
