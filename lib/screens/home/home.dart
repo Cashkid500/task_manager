@@ -23,7 +23,8 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool isChecked = false;
   GetTaskResponse? tasks;
-
+  bool isArraySet = false;
+  List<bool> arrayOfChecks = [];
   void handleGetTask() {
     ref.read(getTaskStateNotifierProvider.notifier).getTask();
   }
@@ -36,6 +37,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
   }
 
+  void fillArray() {
+    if (tasks != null && !isArraySet) {
+      if (tasks!.data.tasks.isNotEmpty) {
+        for (int i = 0; i < tasks!.data.tasks.length; i++) {
+          setState(() {
+            arrayOfChecks.add(false);
+          });
+        }
+
+        setState(() {
+          isArraySet = true;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final getTaskState = ref.watch(getTaskStateNotifierProvider);
@@ -44,6 +61,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         setState(() {
           tasks = getTaskState.responseData;
         });
+        fillArray();
       });
     } else if (getTaskState is GetTaskFailure) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -63,8 +81,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Column(
-            children: [
+          child: Column(children: [
             Padding(
               padding: EdgeInsets.only(left: 20.sp, top: 20.sp, right: 20.sp),
               child: Row(
@@ -176,11 +193,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                           //*********  Checkbox *********/
                           Checkbox(
-                            value: isChecked,
+                            value: arrayOfChecks[index],
                             checkColor: blackText,
                             onChanged: (bool? value) {
                               setState(() {
-                                isChecked = value ?? false;
+                                arrayOfChecks[index] = value ?? false;
                               });
                             },
                           ),
@@ -198,4 +215,3 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
-
