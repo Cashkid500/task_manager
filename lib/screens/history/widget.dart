@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/text_constants.dart';
 
+//*********************************************************/
+//***************  Completed Task Widget ********************/
+//*********************************************************/
 class CompletedTaskWidget extends StatelessWidget {
   const CompletedTaskWidget({
     super.key,

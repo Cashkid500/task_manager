@@ -124,17 +124,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             if (GetTaskState is GetTaskLoading || tasks == null) ...[
               const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                ),
               ),
             ] else ...[
               ...List.generate(
                 tasks!.data.tasks.length,
                 (index) => GestureDetector(
                   onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UpdateTaskScreen(
-                              id: tasks!.data.tasks[index].trackid))),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UpdateTaskScreen(
+                            id: tasks!.data.tasks[index].trackid)),
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

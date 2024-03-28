@@ -6,6 +6,9 @@ import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
 import 'package:task_manager/screens/home/home.dart';
 
+//*********************************************************/
+//***************  Date Field Widget ********************/
+//*********************************************************/
 class DateFieldWidget extends StatelessWidget {
   const DateFieldWidget({
     super.key,
@@ -56,6 +59,9 @@ class DateFieldWidget extends StatelessWidget {
   }
 }
 
+//*********************************************************/
+//***************  Header Widget *************************/
+//*********************************************************/
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
     super.key,
@@ -90,6 +96,9 @@ class HeaderWidget extends StatelessWidget {
   }
 }
 
+//*********************************************************/
+//***************  Text Field Widget ********************/
+//*********************************************************/
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
     super.key,
@@ -136,6 +145,9 @@ class TextFieldWidget extends StatelessWidget {
   }
 }
 
+//*********************************************************/
+//***************  Add Button Widget ********************/
+//*********************************************************/
 class AddButton extends StatelessWidget {
   const AddButton({
     super.key,
@@ -171,6 +183,9 @@ class AddButton extends StatelessWidget {
   }
 }
 
+//*********************************************************/
+//***************  App Snackbar Widget ********************/
+//*********************************************************/
 class AppSnackbar {
   final BuildContext context;
   final bool isError;
@@ -228,6 +243,9 @@ class AppSnackbar {
   }
 }
 
+//*******************************************************/
+//***************  Show Toast Widget ****************/
+//***************************************************/
 class ShowToast {
   static void errorToast(BuildContext context, String text) {
     AppSnackbar toast = AppSnackbar(context, isError: true);
