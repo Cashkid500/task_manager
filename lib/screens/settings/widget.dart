@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+//*********************************************************/
+//***************   Dividing Widget ********************/
+//*********************************************************/
 class Dividing extends StatelessWidget {
   const Dividing({
     super.key,
