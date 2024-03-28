@@ -174,28 +174,6 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                   ),
                 ),
               ],
-        
-              // const Spacer(),
-        
-              // Container(
-              //   height: 40.sp,
-              //   width: 160.sp,
-              //   decoration: BoxDecoration(
-              //     color: blackText,
-              //     borderRadius: BorderRadius.circular(30.sp),
-              //   ),
-              //   child: Center(
-              //     child: Text(
-              //       TaskManagerText.taskReassigned,
-              //       style: TextStyle(
-              //         fontSize: 15.sp,
-              //         color: whiteText,
-              //         fontFamily: TaskManagerAssetsPath.taskManagerFont,
-              //         fontWeight: FontWeight.normal,
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ]),
           ),
         ),
