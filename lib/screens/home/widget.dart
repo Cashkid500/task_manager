@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/text_constants.dart';
 
+//*********************************************************/
+//***************   Rich Text Widget ********************/
+//*********************************************************/
 class RichTextWidget extends StatelessWidget {
   const RichTextWidget({
     super.key,
@@ -36,6 +39,9 @@ class RichTextWidget extends StatelessWidget {
   }
 }
 
+//*********************************************************/
+//***************   Pending Task Widget ********************/
+//*********************************************************/
 class PendingTaskWidget extends StatelessWidget {
   const PendingTaskWidget({
     super.key,
