@@ -90,7 +90,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                   SizedBox(width: 30.sp),
 
-                  //*********  Task Manager Text *********/
+                  //////////////////////////////////////////////////////////
+                  /// TASK MANAGER TEXT
+                  /////////////////////////////////////////////////////////
                   const RichTextWidget(),
                   SizedBox(width: 60.sp),
 
@@ -117,7 +119,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             SizedBox(height: 20.sp),
 
-            //********* Pending Task Container *********/
+            //////////////////////////////////////////////////////////
+            /// PENDING TASK CONTAINER
+            /////////////////////////////////////////////////////////
             const PendingTaskWidget(),
 
             SizedBox(height: 20.sp),
@@ -150,6 +154,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  //////////////////////////////////////////////////////////
+                                  /// FORM FIELDS SECTION
+                                  /////////////////////////////////////////////////////////
                                   //*********  Title FormField *********/
                                   Text(
                                     tasks!.data.tasks[index].title,
@@ -194,7 +201,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ]),
                           ),
 
-                          //*********  Checkbox *********/
+                          //////////////////////////////////////////////////////////
+                          /// CHECKBOX
+                          /////////////////////////////////////////////////////////
                           Checkbox(
                             value: arrayOfChecks[index],
                             checkColor: blackText,
