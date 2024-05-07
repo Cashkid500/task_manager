@@ -68,11 +68,16 @@ class _AddTaskScreenState extends ConsumerState<AddTaskScreen> {
         child: SafeArea(
           child: Column(
             children: [
-            //*********  Header *********/
+            //////////////////////////////////////////////////////////
+            /// HEADER SECTION
+            /////////////////////////////////////////////////////////
             const HeaderWidget(rowTextPath: TaskManagerText.addTask),
 
             SizedBox(height: 60.sp),
 
+            //////////////////////////////////////////////////////////
+            /// FORM FIELDS SECTION
+            /////////////////////////////////////////////////////////
             //********* Title TextField *********/
             TextFieldWidget(
               height: 54.sp,
@@ -104,7 +109,9 @@ class _AddTaskScreenState extends ConsumerState<AddTaskScreen> {
               )
 
             else
-            //********* Add Task Button *********/
+            //////////////////////////////////////////////////////////
+            /// ADD TASK BUTTON
+            /////////////////////////////////////////////////////////
             AddButton(
                 textPath: TaskManagerText.add,
                 onTap: () {
