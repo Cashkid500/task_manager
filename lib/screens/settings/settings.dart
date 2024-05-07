@@ -20,12 +20,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: SafeArea(
         child: Column(
           children: [
-          //*********  Header *********/
+          //////////////////////////////////////////////////////////
+          /// HEADER SECTION
+          /////////////////////////////////////////////////////////
           const HeaderWidget(rowTextPath: TaskManagerText.settings,),
 
           SizedBox(height: 80.sp),
 
-          //********* Logo *********/
+          //////////////////////////////////////////////////////////
+          /// LOGO
+          /////////////////////////////////////////////////////////
           Container(
             height: 80.sp,
             width: 80.sp,
@@ -67,7 +71,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           const Dividing(),
 
-          //*********  Clear Data Button *********/
+          //////////////////////////////////////////////////////////
+          /// CLEAR DATA BUTTON
+          /////////////////////////////////////////////////////////
           Container(
             height: 40.sp,
             width: 250.sp,
@@ -97,7 +103,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
 
-          //*********  Terms and Condition *********/
+          //////////////////////////////////////////////////////////
+          /// TERMS AND CONDITIONS
+          /////////////////////////////////////////////////////////
           Padding(
             padding: EdgeInsets.only(right: 63.sp),
             child: Text(
@@ -113,7 +121,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           SizedBox(height: 20.sp),
 
-          //*********  Privacy Policy *********/
+          //////////////////////////////////////////////////////////
+          /// PRIVACY POLICY
+          /////////////////////////////////////////////////////////
           Padding(
             padding: EdgeInsets.only(right: 120.sp),
             child: Text(
