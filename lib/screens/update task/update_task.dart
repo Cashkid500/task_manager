@@ -69,13 +69,18 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(children: [
-            //*********  Header *********/
+            //////////////////////////////////////////////////////////
+            /// HEADER SECTION
+            /////////////////////////////////////////////////////////
             const HeaderWidget(
               rowTextPath: TaskManagerText.updateTask,
             ),
 
             SizedBox(height: 60.sp),
 
+            //////////////////////////////////////////////////////////
+            /// FORM FIELDS SECTION
+            /////////////////////////////////////////////////////////
             //********* Title TextField *********/
             TextFieldWidget(
               height: 54.sp,
@@ -96,8 +101,11 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
 
             SizedBox(height: 40.sp),
 
-            //********* Date TextField *********/ 
-            DateFieldWidget(dateController: dateController, onTap: () => onTapFunction(context: context),),
+            //********* Date TextField *********/
+            DateFieldWidget(
+              dateController: dateController,
+              onTap: () => onTapFunction(context: context),
+            ),
 
             SizedBox(height: 40.sp),
 
@@ -105,7 +113,9 @@ class _UpdateTaskScreenState extends ConsumerState<UpdateTaskScreen> {
               const Center(child: CircularProgressIndicator())
             else
 
-              //********* Update Button *********/
+              //////////////////////////////////////////////////////////
+              /// UPDATE BUTTON 
+              /////////////////////////////////////////////////////////
               AddButton(
                 textPath: TaskManagerText.update,
                 onTap: () {
