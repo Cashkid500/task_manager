@@ -86,12 +86,16 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
             padding: EdgeInsets.only(bottom: 20.sp),
             child: Column(
               children: [
-              //*********  Header *********/
+              //////////////////////////////////////////////////////////
+              /// HEADER SECTION
+              /////////////////////////////////////////////////////////
               const HeaderWidget(rowTextPath: TaskManagerText.history),
         
               SizedBox(height: 30.sp),
         
-              //********* Completed Task Container *********/
+              //////////////////////////////////////////////////////////
+              /// COMPLETED TASK CONTAINER
+              /////////////////////////////////////////////////////////
               const CompletedTaskWidget(),
         
               SizedBox(height: 20.sp),
@@ -117,6 +121,9 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    //////////////////////////////////////////////////////////
+                                    /// FORM FIELDS SECTION
+                                    /////////////////////////////////////////////////////////
                                     //*********  Title TextField *********/
                                     Text(
                                       tasks!.data.tasks[index].title,
@@ -161,7 +168,9 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                                   ]),
                             ),
                   
-                            //*********  Delete Task Icon *********/
+                            //////////////////////////////////////////////////////////
+                            /// DELETE TASK ICON
+                            /////////////////////////////////////////////////////////
                             GestureDetector(
                                 onTap: () => handleDeleteTask(
                                     id: tasks!.data.tasks[index].trackid),
