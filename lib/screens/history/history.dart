@@ -84,22 +84,21 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
         child: SafeArea(
           child: Container(
             padding: EdgeInsets.only(bottom: 20.sp),
-            child: Column(
-              children: [
+            child: Column(children: [
               //////////////////////////////////////////////////////////
               /// HEADER SECTION
               /////////////////////////////////////////////////////////
               const HeaderWidget(rowTextPath: TaskManagerText.history),
-        
+
               SizedBox(height: 30.sp),
-        
+
               //////////////////////////////////////////////////////////
               /// COMPLETED TASK CONTAINER
               /////////////////////////////////////////////////////////
               const CompletedTaskWidget(),
-        
+
               SizedBox(height: 20.sp),
-        
+
               if (GetTaskState is GetTaskLoading || tasks == null) ...[
                 const Center(
                   child: CircularProgressIndicator(),
@@ -130,36 +129,36 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                                       style: TextStyle(
                                         fontSize: 20.sp,
                                         color: blackText,
-                                        fontFamily:
-                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontFamily: TaskManagerAssetsPath
+                                            .taskManagerFont,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
-                  
+
                                     SizedBox(height: 5.sp),
-                  
+
                                     //*********  Description TextField *********/
                                     Text(
                                       tasks!.data.tasks[index].description,
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         color: blackText,
-                                        fontFamily:
-                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontFamily: TaskManagerAssetsPath
+                                            .taskManagerFont,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
-                  
+
                                     SizedBox(height: 5.sp),
-                  
+
                                     //*********  Date TextField *********/
                                     Text(
                                       tasks!.data.tasks[index].date,
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         color: blackText,
-                                        fontFamily:
-                                            TaskManagerAssetsPath.taskManagerFont,
+                                        fontFamily: TaskManagerAssetsPath
+                                            .taskManagerFont,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
@@ -167,15 +166,16 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                                       SizedBox(height: 20.sp),
                                   ]),
                             ),
-                  
+
                             //////////////////////////////////////////////////////////
                             /// DELETE TASK ICON
                             /////////////////////////////////////////////////////////
                             GestureDetector(
-                                onTap: () => handleDeleteTask(
-                                    id: tasks!.data.tasks[index].trackid),
-                                child: const Icon(Icons.restore_from_trash,
-                                    color: Colors.red)),
+                              onTap: () => handleDeleteTask(
+                                  id: tasks!.data.tasks[index].trackid),
+                              child: const Icon(Icons.restore_from_trash,
+                                  color: Colors.red),
+                            ),
                           ],
                         ),
                       ),
@@ -190,4 +190,3 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
     );
   }
 }
-
