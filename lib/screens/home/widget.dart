@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
+import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
+import 'package:task_manager/screens/add%20task/add_task.dart';
+import 'package:task_manager/screens/history/history.dart';
+import 'package:task_manager/screens/settings/settings.dart';
+import 'package:task_manager/screens/update%20task/update_task.dart';
 
 //*********************************************************/
 //***************   Rich Text Widget ********************/
@@ -14,8 +19,7 @@ class RichTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
-      text: TextSpan(
-        children: [
+      text: TextSpan(children: [
         TextSpan(
           text: TaskManagerText.task,
           style: TextStyle(
@@ -66,6 +70,189 @@ class PendingTaskWidget extends StatelessWidget {
             fontWeight: FontWeight.normal,
           ),
         ),
+      ),
+    );
+  }
+}
+
+//*********************************************************/
+//***************   Task Manager Drawer Widget ********************/
+//*********************************************************/
+class TaskManagerDrawerWidget extends StatelessWidget {
+  const TaskManagerDrawerWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(top: 10.sp),
+            child: Column(
+              children: [
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                      text: TaskManagerText.task,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 30.sp,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: TaskManagerAssetsPath.taskManagerFont,
+                      ),
+                    ),
+                    TextSpan(
+                      text: TaskManagerText.manager,
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 30.sp,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: TaskManagerAssetsPath.taskManagerFont,
+                      ),
+                    ),
+                  ]),
+                ),
+
+                const Divider(),
+
+                SizedBox(
+                  height: 30.sp,
+                ),
+
+                //************  Add Task Row ************
+                DrawerRowWidget(
+                  drawerRowText: TaskManagerText.addTask,
+                  icon: Icons.add_outlined,
+                  color: blackText,
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddTaskScreen())),
+                ),
+
+                SizedBox(
+                  height: 30.sp,
+                ),
+
+                //************  Update Task Row ************
+                Padding(
+                  padding: EdgeInsets.only(right: 20.sp, left: 20.sp),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        TaskManagerText.updateTask,
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: TaskManagerAssetsPath.taskManagerFont,
+                        ),
+                      ),
+                      GestureDetector(
+                        // onTap: () => Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) =>
+                        //               UpdateTaskScreen(id: tasks!.data.tasks[index].trackid)),),
+                        child: const Icon(Icons.update),
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(
+                  height: 30.sp,
+                ),
+
+                //************  Delete Task Row ************
+                DrawerRowWidget(
+                  drawerRowText: TaskManagerText.deleteTask,
+                  icon: Icons.restore_from_trash,
+                  color: Colors.red,
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HistoryScreen())),
+                ),
+
+                SizedBox(
+                  height: 30.sp,
+                ),
+
+                //************  History Row ************
+                DrawerRowWidget(
+                  drawerRowText: TaskManagerText.history,
+                  icon: Icons.history_outlined,
+                  color: blackText,
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HistoryScreen())),
+                ),
+
+                SizedBox(
+                  height: 30.sp,
+                ),
+
+                //************  Settings Row ************
+                DrawerRowWidget(
+                  drawerRowText: TaskManagerText.settings,
+                  icon: Icons.settings_outlined,
+                  color: blackText,
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingsScreen())),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//*********************************************************/
+//***************   Drawer Row Widget ********************/
+//*********************************************************/
+class DrawerRowWidget extends StatelessWidget {
+  const DrawerRowWidget({
+    super.key,
+    required this.drawerRowText,
+    required this.icon,
+    required this.onTap,
+    required this.color,
+  });
+
+  final String drawerRowText;
+  final IconData? icon;
+  final VoidCallback onTap;
+  final Color? color;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: 20.sp, left: 20.sp),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            drawerRowText,
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.normal,
+              fontFamily: TaskManagerAssetsPath.taskManagerFont,
+            ),
+          ),
+          GestureDetector(
+            onTap: onTap,
+            child: Icon(icon, color: color, size: 25.sp),
+          ),
+        ],
       ),
     );
   }
