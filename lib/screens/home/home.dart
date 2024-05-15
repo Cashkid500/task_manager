@@ -14,13 +14,16 @@ import 'package:task_manager/screens/update%20task/update_task.dart';
 import 'package:task_manager/state/tasks/tasks_state.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   bool isChecked = false;
   GetTaskResponse? tasks;
   bool isArraySet = false;
@@ -71,6 +74,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       });
     }
     return Scaffold(
+      key: scaffoldKey,
+
+      //*******  FLOATING ACTION BUTTON  **********/
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(context,
             MaterialPageRoute(builder: (context) => const AddTaskScreen())),
@@ -79,6 +85,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         shape: const CircleBorder(),
         child: const Icon(Icons.add_outlined),
       ),
+
+      //*******  DRAWER WIDGET  **********/
+      drawer: const TaskManagerDrawerWidget(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(children: [
@@ -86,7 +95,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               padding: EdgeInsets.only(left: 20.sp, top: 20.sp, right: 20.sp),
               child: Row(
                 children: [
-                  GestureDetector(child: const Icon(Icons.apps)),
+                  GestureDetector(
+                    onTap: () {
+                      scaffoldKey.currentState?.openDrawer();
+                    },
+                    child: const Icon(Icons.apps),
+                  ),
 
                   SizedBox(width: 30.sp),
 
