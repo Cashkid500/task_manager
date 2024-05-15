@@ -139,7 +139,7 @@ class _AddTaskScreenState extends ConsumerState<AddTaskScreen> {
                 }),
           ]),
         ),
-      ),
+      )
     );
   }
 }
