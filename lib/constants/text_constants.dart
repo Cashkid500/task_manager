@@ -40,4 +40,7 @@ class TaskManagerText {
   static const String update = "Update";
   static const String delete = "Delete";
   static const String updateTaskSuccessResponse = "Task Updated Successfully";
+
+//****************** Drawer Texts *******************
+static const String deleteTask = "Delete Task";
 }
