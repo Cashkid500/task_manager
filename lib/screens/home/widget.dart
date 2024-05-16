@@ -7,7 +7,6 @@ import 'package:task_manager/screens/add%20task/add_task.dart';
 import 'package:task_manager/screens/history/history.dart';
 import 'package:task_manager/screens/home/home.dart';
 import 'package:task_manager/screens/settings/settings.dart';
-import 'package:task_manager/screens/update%20task/update_task.dart';
 
 //*********************************************************/
 //***************   Rich Text Widget ********************/
