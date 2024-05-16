@@ -78,8 +78,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
       //*******  FLOATING ACTION BUTTON  **********/
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const AddTaskScreen())),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AddTaskScreen()),
+        ),
         backgroundColor: whiteText,
         focusColor: blackText,
         shape: const CircleBorder(),
@@ -111,22 +113,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   SizedBox(width: 60.sp),
 
                   GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HistoryScreen())),
-                      child: Icon(Icons.history_outlined,
-                          color: blackText, size: 25.sp)),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HistoryScreen()),
+                    ),
+                    child: Icon(Icons.history_outlined,
+                        color: blackText, size: 25.sp),
+                  ),
 
                   SizedBox(width: 30.sp),
 
                   GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SettingsScreen())),
-                      child: Icon(Icons.settings_outlined,
-                          color: blackText, size: 25.sp)),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingsScreen()),
+                    ),
+                    child: Icon(Icons.settings_outlined,
+                        color: blackText, size: 25.sp),
+                  ),
                 ],
               ),
             ),
