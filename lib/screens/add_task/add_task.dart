@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:task_manager/constants/text_constants.dart';
 import 'package:task_manager/models/tasks/body/create_task.dart';
 import 'package:task_manager/providers/state_provider/tasks/tasks_provider.dart';
-import 'package:task_manager/screens/add%20task/widget.dart';
+import 'package:task_manager/screens/add_task/widget.dart';
 import 'package:task_manager/screens/home/home.dart';
 import 'package:task_manager/state/tasks/tasks_state.dart';
 

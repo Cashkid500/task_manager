@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/constants/text_constants.dart';
-import 'package:task_manager/screens/add%20task/add_task.dart';
+import 'package:task_manager/screens/add_task/add_task.dart';
 import 'package:task_manager/screens/history/history.dart';
 import 'package:task_manager/screens/home/home.dart';
 import 'package:task_manager/screens/settings/settings.dart';

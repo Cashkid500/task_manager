@@ -5,12 +5,12 @@ import 'package:task_manager/constants/asset_path.dart';
 import 'package:task_manager/constants/color_constants.dart';
 import 'package:task_manager/models/tasks/response/get_task.dart';
 import 'package:task_manager/providers/state_provider/tasks/tasks_provider.dart';
-import 'package:task_manager/screens/add%20task/add_task.dart';
-import 'package:task_manager/screens/add%20task/widget.dart';
+import 'package:task_manager/screens/add_task/add_task.dart';
+import 'package:task_manager/screens/add_task/widget.dart';
 import 'package:task_manager/screens/history/history.dart';
 import 'package:task_manager/screens/home/widget.dart';
 import 'package:task_manager/screens/settings/settings.dart';
-import 'package:task_manager/screens/update%20task/update_task.dart';
+import 'package:task_manager/screens/update_task/update_task.dart';
 import 'package:task_manager/state/tasks/tasks_state.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
