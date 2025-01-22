@@ -233,7 +233,7 @@ class AppSnackbar {
       child: toastWidget,
       toastDuration: Duration(seconds: seconds ?? 4),
       gravity: ToastGravity.TOP,
-      positionedToastBuilder: (context, child) => Positioned(
+      positionedToastBuilder: (context, child, gravity) => Positioned(
         //top: 0.h,
         top: size.height * 0.034,
         //left: size.width * 0.0628,
